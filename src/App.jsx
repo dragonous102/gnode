@@ -101,7 +101,7 @@ function Scene({ children, onPointerOver, onPointerOut, clicked, setClicked, ...
   useFrame((state, delta) => {
 
     if (clicked) {
-      const distanceToCam = -10;
+      const distanceToCam = -15;
       const euler = new THREE.Euler(angle[0], angle[1], angle[2]);
       const directionVector = new THREE.Vector3(0, 0, -1); // Forward direction for cameras in Three.js is along negative Z
 

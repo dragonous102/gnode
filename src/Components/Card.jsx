@@ -41,7 +41,7 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
     easing.damp(ref.current.material, 'distort', hovered ? 0.3 : 0.3, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
     easing.dampE(ref.current.rotation, rotation, 0.5, delta)
-    // easing.damp3(ref.current.scale, clicked ? 15 : 8, 0.25, delta)
+    easing.damp3(ref.current.scale, clicked ? 15 : 8, 0.25, delta)
     easing.dampC(ref.current.material.color, hovered ? '#fff' : 'white', 0.25, delta)
 
 
