@@ -14,13 +14,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #151515;
-  color: white;
+  color: #749cff;
 }
 
 .btn_div {
   position: absolute;
+  top: 0;
+  right: 20px;
   z-index: 1;
+  display: flex;
+  width: 100%;
+  justify-content: end;
 }
 
 .connect_btn {
@@ -70,4 +74,82 @@ body {
   height: 100px;
   width: 2px;
   background: black;
+}
+
+.scene__project {
+  position: absolute;
+}
+
+.project_overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: 1.4s cubic-bezier(.19, 1, .22, 1), ;
+}
+
+.project__back {
+  position: absolute;
+  top: 3vw;
+  left: 3vw;
+  width: 10vw;
+  height: 10vw;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.t-cta {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  line-height: 1.2em;
+  color: #434343;
+}
+
+.project__back-circle {
+  border-radius: 50%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  background-color: #749cff;
+}
+
+.project__outer {
+  position: relative;
+  width: 100%;
+  z-index: 4;
+}
+
+.project__container {
+  position: relative;
+  z-index: 2;
+  padding-right: 13px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 100%;
+}
+
+.project.is-left .project__content {
+  padding-left: 3vw;
+}
+
+.project__title {
+  color: #434343;
+  margin-top: 10vw;
+  margin-bottom: 2.125rem;
+  pointer-events: auto;
+  font-size: 3rem;
 }

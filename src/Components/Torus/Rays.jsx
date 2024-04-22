@@ -14,7 +14,7 @@ const tra = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.25 })
 
 export const Rays = (props) => {
   const ref = useRef()
-  const count = 50;
+  const count = 10;
   return (
     <>
       <group ref={ref} {...props} />

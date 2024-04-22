@@ -14,10 +14,9 @@ import { isPointVisible } from "../utils"
 
 let visibilityThreshold = 20; // Adjust this for your desired distance
 
-function Card({ url, active, rotation, ...props }) {
+function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation, ...props }) {
   const ref = useRef()
   const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
   const texture = useTexture(url)
   const { camera } = useThree();
   const [visible, setVisible] = useState(false);
@@ -30,7 +29,7 @@ function Card({ url, active, rotation, ...props }) {
   });
   useFrame((state, delta) => {
     const distance = ref.current.position.distanceTo(camera.position);
-    visibilityThreshold = 40
+    visibilityThreshold = 30
     // const shouldBeVisible = distance <= visibilityThreshold;
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
 
@@ -39,10 +38,10 @@ function Card({ url, active, rotation, ...props }) {
     //  ref.current.visible = shouldBeVisible
 
 
-    easing.damp(ref.current.material, 'distort', hovered ? 0.5 : 0.5, 0.25, delta)
+    easing.damp(ref.current.material, 'distort', hovered ? 0.3 : 0.3, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
     easing.dampE(ref.current.rotation, rotation, 0.5, delta)
-    easing.damp3(ref.current.scale, clicked ? 15 : 8, 0.25, delta)
+    // easing.damp3(ref.current.scale, clicked ? 15 : 8, 0.25, delta)
     easing.dampC(ref.current.material.color, hovered ? '#fff' : 'white', 0.25, delta)
 
 
@@ -64,12 +63,12 @@ function Card({ url, active, rotation, ...props }) {
         {...animProps}
         onPointerOver={(e) => (e.stopPropagation(), hover(true))}
         onPointerOut={(e) => (e.stopPropagation(), hover(false))}
-        onClick={(e) => (e.stopPropagation(), click(!clicked))}
+        onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setObjPos(props.position), setAngle(rotation))}
       >
 
-        <planeGeometry {...animProps} args={[1, 0.8, 32, 32]} />
+        <planeGeometry {...animProps} args={[1, 0.7, 32, 32]} />
 
-        {hovered ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
+        {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
           <DissolveMaterial
             baseMaterial={material}
             visible={visible}

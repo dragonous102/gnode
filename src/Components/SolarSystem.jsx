@@ -46,10 +46,9 @@ function Planet({ planet, idx }) {
 }
 
 
-function SolarSystem({ rotation, scale, ...props }) {
+function SolarSystem({ rotation, scale, clicked, setClicked, ...props }) {
   const ref = useRef()
   const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
   const { camera } = useThree();
   const [visible, setVisible] = useState(false);
 
@@ -75,10 +74,10 @@ function SolarSystem({ rotation, scale, ...props }) {
     <mesh {...props} ref={ref}
       onPointerOver={(e) => (e.stopPropagation(), hover(true))}
       onPointerOut={(e) => (e.stopPropagation(), hover(false))}
-      onClick={(e) => (e.stopPropagation(), click(!clicked))}
+      onClick={(e) => (e.stopPropagation(), setClicked(!clicked))}
     >
       <planeGeometry args={[1, 0.8, 64, 64]} />
-      {hovered ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
+      {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
         <DissolveMaterial
           baseMaterial={material}
           visible={visible}
