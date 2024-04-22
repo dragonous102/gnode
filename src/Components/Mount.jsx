@@ -65,7 +65,6 @@ export default function App({ ...props }) {
     const { color } = useSpring({ color: 0, from: { color: 1 }, config: { friction: 50 }, loop: true })
     return (
         <mesh {...props}>
-            {/* <color attach="background" args={['yellow']} /> */}
             <ambientLight intensity={0.8} />
             <directionalLight castShadow position={[2.5, 12, 12]} intensity={1} />
             <Suspense fallback={null}>

@@ -1,7 +1,5 @@
 import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Bvh, OrbitControls, useHelper } from '@react-three/drei'
-import { useControls } from 'leva'
+import { useFrame } from '@react-three/fiber'
 import { Rays } from './Rays'
 
 function Torus(props) {
@@ -25,14 +23,14 @@ function Torus(props) {
   )
 }
 
-export default function App({...props}) {
+export default function App({ ...props }) {
   return (
     <>
       {/** Anything that Bvh wraps is getting three-mesh-bvh's acceleratedRaycast.
            Click on "enabled" to see what normal raycast performance in threejs looks like. */}
-        <Rays {...props} >
-          <Torus  />
-        </Rays>
-      </>
+      <Rays {...props} >
+        <Torus />
+      </Rays>
+    </>
   )
 }

@@ -1,7 +1,6 @@
 import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useGLTF, Bounds, Edges } from '@react-three/drei'
-// use ↓ "DebugLayerMaterial as LayerMaterial" ↓ here for integrated leva debug panels
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
 
 const App = ({ ...props }) => (
@@ -10,7 +9,6 @@ const App = ({ ...props }) => (
             <Bounds fit clip observe margin={1.25}>
                 <Cursor scale={[0.5, 1, 0.5]} />
             </Bounds>
-            {/* <gridHelper args={[10, 40, '#101010', '#050505']} position={[-0.25, 0, 0]} rotation={[0, 0, Math.PI / 2]} /> */}
         </group>
     </mesh>
 )

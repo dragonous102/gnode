@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { Canvas, useLoader, extend, useFrame, useThree } from "@react-three/fiber";
 
 function calculateFigureEightPoints(a, shift, numPoints) {
   let points = [];
@@ -30,9 +29,6 @@ function calculateFigureEightPoints(a, shift, numPoints) {
     points.push(new THREE.Vector3(x, y, z));
 
   }
-
-
-
 
   return points;
 }

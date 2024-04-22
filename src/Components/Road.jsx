@@ -1,15 +1,14 @@
-import { useRef, Suspense, useState, useEffect, useLayoutEffect, useMemo } from "react";
-import { Canvas, useLoader, extend, useFrame, useThree } from "@react-three/fiber";
-import { Line, MeshDistortMaterial, useTexture } from "@react-three/drei";
+import { useRef, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { Line, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { Physics, useSphere } from "@react-three/cannon"
-import { easing, geometry } from 'maath'
+import { easing } from 'maath'
 
 import { isPointVisible, findClosestPoint, calculateFigureEightPoints } from "../utils";
 
-let visibilityThreshold = 20; // Adjust this for your desired distance
 
-function Road({ idx }) {
+function Road() {
     let radius = 50; // radius of each lobe of the eight
     let numPoints = 10000; // number of points to calculate
 
@@ -52,13 +51,7 @@ function Clump({ mat = new THREE.Matrix4(), vec = new THREE.Vector3(), ...props 
 
 
     useFrame((state, delta) => {
-        const distance = ref.current.position.distanceTo(camera.position);
-        visibilityThreshold = 40
-        // const shouldBeVisible = distance <= visibilityThreshold;
         const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
-
-        // setVisible(shouldBeVisible);
-        // ref.current.visible = shouldBeVisible
 
         for (let i = 0; i < 30; i++) {
             // Get current whereabouts of the instanced sphere
@@ -118,7 +111,7 @@ function Ecliptic({ points }) {
             dashed
             dashScale={4}
             gapSize={4}
-            points={visiblePoints.length > 0 ? visiblePoints : points}
+            points={visiblePoints?.length > 0 ? visiblePoints : points}
             color={fromColor}
         />
     );

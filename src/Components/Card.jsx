@@ -1,13 +1,10 @@
-import { useRef, Suspense, useState, useEffect, useLayoutEffect, useMemo } from "react";
-import { Canvas, useLoader, extend, useFrame, useThree } from "@react-three/fiber";
-import { useScroll, Html, MeshDistortMaterial, useTexture } from "@react-three/drei";
-import { easing, geometry } from 'maath'
+import { useRef, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { MeshDistortMaterial, useTexture } from "@react-three/drei";
+import { easing } from 'maath'
 import { useSpring, animated } from '@react-spring/three';
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { Experience } from "./Experience";
-// import ParticleComponent from "./Particle"
-import { useGLTF, Environment, ContactShadows } from "@react-three/drei";
-import { useControls } from "leva";
+import { Environment } from "@react-three/drei";
 import { DissolveMaterial } from "./DissolveMaterial";
 import * as THREE from "three";
 import { isPointVisible } from "../utils"
@@ -28,15 +25,9 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
     config: { mass: 5, tension: 400, friction: 50 }, // Customize spring physics
   });
   useFrame((state, delta) => {
-    const distance = ref.current.position.distanceTo(camera.position);
     visibilityThreshold = 30
-    // const shouldBeVisible = distance <= visibilityThreshold;
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
-
     setVisible(shouldBeVisible);
-
-    //  ref.current.visible = shouldBeVisible
-
 
     easing.damp(ref.current.material, 'distort', hovered ? 0.3 : 0.3, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)

@@ -1,12 +1,10 @@
-import { useRef, Suspense, useState, useEffect, useLayoutEffect, useMemo } from "react";
-import { Canvas, useLoader, extend, useFrame, useThree } from "@react-three/fiber";
-import { MeshDistortMaterial, useTexture, GradientTexture, Environment, Stars, Preload, Html, Line, Image, useScroll, Billboard, Text } from "@react-three/drei";
+import { useRef, useState } from "react";
+import { useLoader, useFrame, useThree } from "@react-three/fiber";
+import { MeshDistortMaterial, useTexture, Environment } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { planets } from "../planets";
 import * as THREE from "three";
-import { suspend } from 'suspend-react'
-// import { generate } from 'random-words'
-import { easing, geometry } from 'maath'
+import { easing } from 'maath'
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 import { DissolveMaterial } from "./DissolveMaterial";
@@ -46,7 +44,7 @@ function Planet({ planet, idx }) {
 }
 
 
-function SolarSystem({ rotation, scale, clicked, setClicked, ...props }) {
+function SolarSystem({ rotation, scale, clicked, setClicked, setObjPos, setAngle, ...props }) {
   const ref = useRef()
   const [hovered, hover] = useState(false)
   const { camera } = useThree();
@@ -57,24 +55,20 @@ function SolarSystem({ rotation, scale, clicked, setClicked, ...props }) {
     map: texture // This applies the texture as the color map
   });
   useFrame((state, delta) => {
-    const distance = ref.current.position.distanceTo(camera.position);
-    let visibilityThreshold = 30
-    // const shouldBeVisible = distance <= visibilityThreshold;
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
     setVisible(shouldBeVisible);
 
     // easing.damp(ref.current.material, 'distort', hovered ? 0.5 : 0, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
     easing.dampE(ref.current.rotation, clicked ? [0, Math.PI * 3 / 2, 0] : rotation, 0.5, delta)
-    easing.damp3(ref.current.scale, clicked ? 8 : shouldBeVisible ? scale : 0, 0.25, delta)
-    // easing.dampC(ref.current.material.color, hovered ? '#ef2060' : 'white', 0.25, delta)
+    easing.damp3(ref.current.scale, clicked ? [8, 6, 3] : shouldBeVisible ? scale : 0, 0.25, delta)
 
   })
   return (
     <mesh {...props} ref={ref}
       onPointerOver={(e) => (e.stopPropagation(), hover(true))}
       onPointerOut={(e) => (e.stopPropagation(), hover(false))}
-      onClick={(e) => (e.stopPropagation(), setClicked(!clicked))}
+      onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setObjPos(props.position), setAngle(rotation))}
     >
       <planeGeometry args={[1, 0.8, 64, 64]} />
       {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
