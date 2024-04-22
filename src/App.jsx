@@ -54,7 +54,7 @@ function App() {
 
         <ambientLight intensity={0.8} />
         <color attach="background" args={["#ddfdff"]} />
-        <ScrollControls pages={6} infinite>
+        <ScrollControls pages={15} infinite>
           <Scene position={[0, 0, 0]} onPointerOver={hover} onPointerOut={hover} />
         </ScrollControls>
         <Preload all />

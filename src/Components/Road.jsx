@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { Physics, useSphere } from "@react-three/cannon"
 import { easing, geometry } from 'maath'
 
-import { findClosestPoint, calculateFigureEightPoints } from "../utils";
+import { isPointVisible, findClosestPoint, calculateFigureEightPoints } from "../utils";
 
 let visibilityThreshold = 20; // Adjust this for your desired distance
 
@@ -53,9 +53,11 @@ function Clump({ mat = new THREE.Matrix4(), vec = new THREE.Vector3(), ...props 
 
     useFrame((state, delta) => {
         const distance = ref.current.position.distanceTo(camera.position);
-        visibilityThreshold = 30
-        const shouldBeVisible = distance <= visibilityThreshold;
+        visibilityThreshold = 40
+        // const shouldBeVisible = distance <= visibilityThreshold;
+        const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
 
+        // setVisible(shouldBeVisible);
         // ref.current.visible = shouldBeVisible
 
         for (let i = 0; i < 30; i++) {
