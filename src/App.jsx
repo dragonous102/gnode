@@ -1,13 +1,12 @@
 import { useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { ScrollControls, useProgress, Preload, Html } from "@react-three/drei";
+import { ScrollControls, Preload, Html } from "@react-three/drei";
 import { useSDK } from '@metamask/sdk-react';
 import { Atom } from "react-loading-indicators";
 import Scene from "./Components/Scene"
 
 
 function App() {
-  const { progress } = useProgress();
   const [clicked, setClicked] = useState(null)
   const [account, setAccount] = useState("");
   const { sdk, connected, chainId } = useSDK();
