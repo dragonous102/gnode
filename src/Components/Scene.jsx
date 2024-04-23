@@ -90,10 +90,10 @@ function Scene({ children, clicked, setClicked, ...props }) {
         <group ref={ref}>
 
             <Road />
-            <Torus position={[35, 2.5, 25]}></Torus>
+            <Torus position={[35, 1, 25]}></Torus>
             <Mount position={[-30, 1, 12]} scale={0.4} rotation={[0, -2, 0]}></Mount>
             <Arrow
-                position={[-25, 1.5, -15]}
+                position={[-25, 0.5, -15]}
                 rotation={[-0.6, 0.3, 0]}
             />
 
@@ -106,7 +106,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <Html transform portal={{ current: scrollData.fixed }} position={[40, 2, -25]} rotation={[0, -1.5, 0]}>
+            <Html transform portal={{ current: scrollData.fixed }} position={[45, 2, -30]} rotation={[0, -1.5, 0]}>
                 <div className="content" >
                     History of Acient
                 </div>
@@ -114,14 +114,14 @@ function Scene({ children, clicked, setClicked, ...props }) {
 
             <Card
                 url={`/textures/galaxy1.jpg`}
-                position={[5, 5, 25]}
+                position={[5, 2, 25]}
                 rotation={[0, 1.5, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <Html transform portal={{ current: scrollData.fixed }} position={[5, 5, 20]} rotation={[0, 1.5, 0]}>
+            <Html transform portal={{ current: scrollData.fixed }} position={[0, 2, 22]} rotation={[0, 1.5, 0]}>
                 <div className="content" >
                     Universe
                 </div>
@@ -129,7 +129,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
 
             <Card
                 url={`/textures/download.jpg`}
-                position={[-2, 5, -22]}
+                position={[-2, 2, -22]}
                 rotation={[0, 0.5, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
@@ -138,7 +138,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
             />
             <Card
                 url={`/textures/project2.jpg`}
-                position={[-30, 5, -30]}
+                position={[-30, 2, -30]}
                 rotation={[0, 0.8, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
@@ -147,7 +147,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
             />
             <Card
                 url={`/textures/images.jpg`}
-                position={[-60, 4, -10]}
+                position={[-60, 2, -10]}
                 rotation={[0, 2, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
@@ -156,7 +156,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
             />
             <Card
                 url={`/textures/project3.jpg`}
-                position={[-50, 3, 30]}
+                position={[-50, 2, 30]}
                 rotation={[0, 3.14, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
@@ -166,7 +166,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
 
             <Card
                 url={`/textures/project3.jpg`}
-                position={[-50, 3, 30]}
+                position={[-50, 2, 30]}
                 rotation={[0, 3.14, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
@@ -176,7 +176,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
 
             <SolarSystem
                 rotation={[0, Math.PI * 3 / 2, 0]}
-                position={[-15, 1, 20]}
+                position={[-15, 2, 20]}
                 scale={[6, 5, 2]}
                 setClicked={setClicked}
                 clicked={clicked}

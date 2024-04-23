@@ -20,6 +20,7 @@
     "maath": "^0.10.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loading-indicators": "^0.2.3",
     "three-custom-shader-material": "^5.4.0",
     "three-stdlib": "^2.29.6",
     "threejs-meshline": "^2.0.12",

@@ -53,7 +53,7 @@ function Clump({ mat = new THREE.Matrix4(), vec = new THREE.Vector3(), ...props 
     useFrame((state, delta) => {
         const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 20; i++) {
             // Get current whereabouts of the instanced sphere
             ref.current.getMatrixAt(i, mat)
             // This is enough to drive it towards the center-point.
@@ -65,7 +65,7 @@ function Clump({ mat = new THREE.Matrix4(), vec = new THREE.Vector3(), ...props 
     })
     return (
         <>
-            <instancedMesh position={[3, 2, 3]} ref={ref} castShadow receiveShadow args={[sphereGeometry, baubleMaterial, 30]} material-map={texture}>
+            <instancedMesh position={[3, 0, 3]} ref={ref} castShadow receiveShadow args={[sphereGeometry, baubleMaterial, 20]} material-map={texture}>
             </instancedMesh>
         </>
 

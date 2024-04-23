@@ -26,7 +26,7 @@ function calculateFigureEightPoints(a, shift, numPoints) {
 
 
     const y = 3 * Math.sin(t)
-    points.push(new THREE.Vector3(x, y, z));
+    points.push(new THREE.Vector3(x, 0, z));
 
   }
 

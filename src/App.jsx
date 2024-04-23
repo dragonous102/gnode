@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { ScrollControls, useProgress, Preload } from "@react-three/drei";
+import { ScrollControls, useProgress, Preload, Html } from "@react-three/drei";
 import { useSDK } from '@metamask/sdk-react';
-
+import { Atom } from "react-loading-indicators";
 import Scene from "./Components/Scene"
 
 
@@ -11,6 +11,15 @@ function App() {
   const [clicked, setClicked] = useState(null)
   const [account, setAccount] = useState("");
   const { sdk, connected, chainId } = useSDK();
+  const [isLoaded, setLoaded] = useState(false);
+
+  // Effect for managing loading state
+  useEffect(() => {
+    // Simulate a loading process
+    const timer = setTimeout(() => setLoaded(true), 2000); // e.g., 2 seconds load time
+    return () => clearTimeout(timer);
+  }, []);
+
   const connect = async () => {
     try {
       if (connected) {
@@ -24,10 +33,9 @@ function App() {
       console.warn(`failed to connect..`, err);
     }
   };
-
   return (
     <>
-      <div className="btn_div">
+      {isLoaded && <div className="btn_div">
         <button className="connect_btn" onClick={connect}>
           {connected ? "Disconnect" : "Connect"}
         </button>
@@ -41,15 +49,17 @@ function App() {
           </div>
         )}
       </div>
+      }
 
       <Canvas style={{ position: "absolute" }}>
-
-        <ambientLight intensity={0.8} />
-        <color attach="background" args={["#ddfdff"]} />
-        <ScrollControls pages={15} infinite>
-          <Scene position={[0, 0, 0]} clicked={clicked} setClicked={setClicked} />
-        </ScrollControls>
-        <Preload all />
+        <Suspense fallback={<Html center><Atom color="#32cd32" size="large" text="Loading..." textColor="#90eb3c" /></Html>}>
+          <ambientLight intensity={0.8} />
+          <color attach="background" args={["#ddfdff"]} />
+          <ScrollControls pages={15} infinite>
+            <Scene position={[0, 0, 0]} clicked={clicked} setClicked={setClicked} />
+          </ScrollControls>
+          <Preload all />
+        </Suspense>
       </Canvas>
       {
         clicked && <section className="scene__project project is-left is-project" data-scene-project="">
@@ -69,7 +79,6 @@ function App() {
           </div>
         </section>
       }
-
     </>
 
   );
