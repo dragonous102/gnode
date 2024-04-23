@@ -18,11 +18,11 @@ function Road() {
     let points3 = calculateFigureEightPoints(radius, 1.5, numPoints);
     let points4 = calculateFigureEightPoints(radius, -1.5, numPoints);
 
-    points.push(points[0]);
-    points1.push(points1[0]);
-    points2.push(points2[0]);
-    points3.push(points2[0]);
-    points4.push(points2[0]);
+    // points.push(points[0]);
+    // points1.push(points1[0]);
+    // points2.push(points2[0]);
+    // points3.push(points2[0]);
+    // points4.push(points2[0]);
 
     return (
         <>

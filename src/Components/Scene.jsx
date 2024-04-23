@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Html, useScroll } from "@react-three/drei";
-import { TextureLoader } from "three/src/loaders/TextureLoader";
 import * as THREE from "three";
 import { easing } from 'maath'
 import { calculateFigureEightPoints } from "../utils";
@@ -23,7 +22,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
     let numPoints = 50000; // number of points to calculate
 
     let points = calculateFigureEightPoints(radius, 0, numPoints);
-    points.push(points[0]);
+    // points.push(points[0]);
     const rot = camera.rotation;
     useFrame((state, delta) => {
 
@@ -48,6 +47,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
         } else {
 
             let offset = scroll.offset
+            console.log(offset);
             offset = Math.abs(offset)
             const totalSegments = points.length - 1; // Number of line segments in the path
             const segFraction = 1 / totalSegments; // Fractional size of one segment's scroll range
@@ -66,12 +66,12 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 // newCameraPosition = points[0]
                 newCameraPosition = new THREE.Vector3().lerpVectors(
                     points[idx],     // Start vector of the current segment
-                    points[0], // End vector of the next segment
+                    points[idx + 1], // End vector of the next segment
                     smoothedT         // Local alpha (progress within current segment)
                 );
-                let newPos = new THREE.Vector3(newCameraPosition.x, newCameraPosition.y + 1, newCameraPosition.z)
+                let newPos = new THREE.Vector3(newCameraPosition.x, newCameraPosition.y + 2, newCameraPosition.z)
                 camera.position.copy(newPos);
-                camera.lookAt(points[1].x, points[1].y + 2, points[1].z); // Adjust as needed
+                camera.lookAt(points[0].x, points[0].y + 2, points[0].z); // Adjust as needed
             }
             else {
                 newCameraPosition = points[idx + 1]
