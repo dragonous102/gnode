@@ -2,7 +2,6 @@ import * as THREE from "three";
 
 function calculateFigureEightPoints(a, shift, numPoints) {
   let points = [];
-
   // Loop through and calculate the points for each lobe (2 * pi for a full circle)
   let radius1 = a + shift
   let radius2 = a - shift

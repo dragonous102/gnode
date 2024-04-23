@@ -10,7 +10,7 @@ import { isPointVisible, findClosestPoint, calculateFigureEightPoints } from "..
 
 function Road() {
     let radius = 50; // radius of each lobe of the eight
-    let numPoints = 10000; // number of points to calculate
+    let numPoints = 1000; // number of points to calculate
 
     let points = calculateFigureEightPoints(radius, 0, numPoints);
     let points1 = calculateFigureEightPoints(radius, 3, numPoints);

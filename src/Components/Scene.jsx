@@ -20,7 +20,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
     const [objPos, setObjPos] = useState([0, 0, 0])
     const [angle, setAngle] = useState([0, 0, 0])
     let radius = 50; // radius of each lobe of the eight
-    let numPoints = 100000; // number of points to calculate
+    let numPoints = 50000; // number of points to calculate
 
     let points = calculateFigureEightPoints(radius, 0, numPoints);
     points.push(points[0]);
