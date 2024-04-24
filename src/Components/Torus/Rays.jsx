@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { useRef, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
+import { easing } from 'maath'
+import { isPointVisible } from '../../utils'
 
 const pointDist = 25
 const raycaster = new THREE.Raycaster()
@@ -14,6 +16,12 @@ const tra = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.25 })
 export const Rays = (props) => {
   const ref = useRef()
   const count = 10;
+  const { camera } = useThree();
+  useFrame((state, delta) => {
+    const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
+    easing.damp3(ref.current.scale, shouldBeVisible ? 1 : 0, 0.25, delta)
+    console.log("or", ref.current.position);
+  })
   return (
     <>
       <group ref={ref} {...props} />

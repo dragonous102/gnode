@@ -1,11 +1,16 @@
 import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { Rays } from './Rays'
+
 
 function Torus(props) {
   const mesh = useRef()
   const sphere = useRef()
-  useFrame((state, delta) => (mesh.current.rotation.x = mesh.current.rotation.y += delta))
+
+  useFrame((state, delta) => {
+
+    mesh.current.rotation.x = mesh.current.rotation.y += delta
+  })
   return (
     <mesh
       ref={mesh}
@@ -24,6 +29,8 @@ function Torus(props) {
 }
 
 export default function App({ ...props }) {
+
+
   return (
     <>
       {/** Anything that Bvh wraps is getting three-mesh-bvh's acceleratedRaycast.

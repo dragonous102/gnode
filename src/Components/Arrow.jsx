@@ -1,17 +1,29 @@
 import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, Bounds, Edges } from '@react-three/drei'
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
+import { easing } from 'maath'
 
-const App = ({ ...props }) => (
-    <mesh {...props}>
-        <group rotation={[Math.PI / 5, -Math.PI / 5, Math.PI / 2]}>
-            <Bounds fit clip observe margin={1.25}>
-                <Cursor scale={[0.5, 1, 0.5]} />
-            </Bounds>
-        </group>
-    </mesh>
-)
+import { isPointVisible } from '../utils'
+
+const App = ({ ...props }) => {
+    const ref = useRef()
+    const { camera } = useThree();
+
+    useFrame((state, delta) => {
+        const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
+        easing.damp3(ref.current.scale, shouldBeVisible ? 1 : 0, 0.25, delta)
+    })
+    return (
+        <mesh {...props} ref={ref}>
+            <group rotation={[Math.PI / 5, -Math.PI / 5, Math.PI / 2]}>
+                <Bounds fit clip observe margin={1.25}>
+                    <Cursor scale={[0.5, 1, 0.5]} />
+                </Bounds>
+            </group>
+        </mesh>
+    )
+}
 
 function Cursor(props) {
     const ref = useRef()

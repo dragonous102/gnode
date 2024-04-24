@@ -89,7 +89,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
         <group ref={ref}>
 
             <Road />
-            <Torus position={[35, 1, 25]}></Torus>
+            <Torus position={[35, 1, 20]}></Torus>
             <Mount position={[-30, 1, 12]} scale={0.4} rotation={[0, -2, 0]}></Mount>
             <Arrow
                 position={[-25, 0.5, -15]}
