@@ -102,8 +102,8 @@ body {
   left: 3vw;
   width: 10vw;
   height: 10vw;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-40%, -40%);
+  transform: translate(-40%, -40%);
   z-index: 5;
   display: flex;
   -webkit-box-pack: center;

@@ -70,7 +70,7 @@ function App() {
         clicked && <section className="scene__project project is-left is-project" data-scene-project="">
           <div className="project__overlay">
             <div className="back__wrapper" onMouseMove={onMouseMove} onMouseOut={onMouseLeave}>
-              <div className="project__back" style={{ ...cursorPosition }} onClick={() => setClicked(false)}  >
+              <div className="project__back" style={{ ...cursorPosition }} onClick={() => { setClicked(false), setCursorPosition({ top: "3vh", left: "3vw" }) }}  >
                 <div className="project__back-cta t-cta" >BACK</div>
                 <div class="project__back-circle"></div>
               </div>
