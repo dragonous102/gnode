@@ -10,19 +10,18 @@ import SolarSystem from './SolarSystem'
 import Torus from "./Torus/Torus";
 import Mount from "./Mount"
 import Arrow from "./Arrow"
+import CardTitle from "./CardTitle";
 
 function Scene({ children, clicked, setClicked, ...props }) {
     const ref = useRef()
     const scroll = useScroll()
     const { camera } = useThree();
-    const scrollData = useScroll();
     const [objPos, setObjPos] = useState([0, 0, 0])
     const [angle, setAngle] = useState([0, 0, 0])
     let radius = 50; // radius of each lobe of the eight
     let numPoints = 50000; // number of points to calculate
 
     let points = calculateFigureEightPoints(radius, 0, numPoints);
-    // points.push(points[0]);
     const rot = camera.rotation;
     useFrame((state, delta) => {
 
@@ -105,11 +104,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <Html transform portal={{ current: scrollData.fixed }} position={[45, 2, -30]} rotation={[0, -1.5, 0]}>
-                <div className="content" >
-                    History of Acient
-                </div>
-            </Html>
+            <CardTitle position={[45, 2, -30]} rotation={[0, -1.5, 0]} title={"History of Ancient"}></CardTitle>
 
             <Card
                 url={`/textures/galaxy1.jpg`}
@@ -120,12 +115,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <Html transform portal={{ current: scrollData.fixed }} position={[2, 2, 21]} rotation={[0, 1.5, 0]}>
-                <div className="content" >
-                    Universe
-                </div>
-            </Html>
-
+            <CardTitle position={[2, 2, 21]} rotation={[0, 1.5, 0]} title={"Universe"}></CardTitle>
             <Card
                 url={`/textures/download.jpg`}
                 position={[-2, 2, -22]}

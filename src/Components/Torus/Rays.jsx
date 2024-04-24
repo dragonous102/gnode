@@ -20,7 +20,6 @@ export const Rays = (props) => {
   useFrame((state, delta) => {
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
     easing.damp3(ref.current.scale, shouldBeVisible ? 1 : 0, 0.25, delta)
-    console.log("or", ref.current.position);
   })
   return (
     <>
