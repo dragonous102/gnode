@@ -9,7 +9,6 @@ import { DissolveMaterial } from "./DissolveMaterial";
 import * as THREE from "three";
 import { isPointVisible } from "../utils"
 
-let visibilityThreshold = 20; // Adjust this for your desired distance
 
 function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation, ...props }) {
   const ref = useRef()
@@ -19,13 +18,7 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
   const [visible, setVisible] = useState(false);
 
 
-  const { scale, opacity } = useSpring({
-    scale: !visible ? [0, 0, 0] : [1, 1, 1], // disappear to 0 or appear to normal size
-    opacity: !visible ? 0 : 1, // fade out to 0 or fade in to 1
-    config: { mass: 5, tension: 400, friction: 50 }, // Customize spring physics
-  });
   useFrame((state, delta) => {
-    visibilityThreshold = 30
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
     setVisible(shouldBeVisible);
 
@@ -34,8 +27,6 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
     easing.dampE(ref.current.rotation, rotation, 0.5, delta)
     easing.damp3(ref.current.scale, clicked ? 15 : 8, 0.25, delta)
     easing.dampC(ref.current.material.color, hovered ? '#fff' : 'white', 0.25, delta)
-
-
 
   })
   const animProps = useSpring({
@@ -48,7 +39,6 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
   });
   return (
     <>
-
       <animated.mesh
         ref={ref} {...props}
         {...animProps}
@@ -57,7 +47,7 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
         onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setObjPos(props.position), setAngle(rotation))}
       >
 
-        <planeGeometry {...animProps} args={[1, 0.7, 32, 32]} />
+        <planeGeometry args={[1, 0.7, 32, 32]} />
 
         {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
           <DissolveMaterial

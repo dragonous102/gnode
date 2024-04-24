@@ -47,7 +47,6 @@ function Scene({ children, clicked, setClicked, ...props }) {
         } else {
 
             let offset = scroll.offset
-            console.log(offset);
             offset = Math.abs(offset)
             const totalSegments = points.length - 1; // Number of line segments in the path
             const segFraction = 1 / totalSegments; // Fractional size of one segment's scroll range

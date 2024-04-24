@@ -77,13 +77,13 @@ export function DissolveMaterial({
 
   useFrame((_state, delta) => {
 
-      easing.damp(
-        uniforms.current.uProgress,
-        "value",
-        visible ? 1 : 0,
-        duration,
-        delta
-      );
+    easing.damp(
+      uniforms.current.uProgress,
+      "value",
+      visible ? 1 : 0,
+      duration,
+      delta
+    );
 
   });
 
@@ -95,8 +95,8 @@ export function DissolveMaterial({
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms.current}
-        toneMapped={true}
-        transparent = {true}
+        toneMapped={false}
+        transparent={true}
       />
     </>
   );

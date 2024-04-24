@@ -13,11 +13,9 @@ function App() {
   const [isLoaded, setLoaded] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ top: 0, left: 0 })
   const onMouseMove = e => {
-    console.log("move", e);
     setCursorPosition({ top: e.clientY, left: e.clientX });
   }
   const onMouseLeave = e => {
-    console.log("out", e);
     setCursorPosition({ top: "3vh", left: "3vw" });
   }
   // Effect for managing loading state
