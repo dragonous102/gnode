@@ -88,6 +88,14 @@ body {
   transform: 1.4s cubic-bezier(.19, 1, .22, 1), ;
 }
 
+.back__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15vw;
+  height: 15vw;
+}
+
 .project__back {
   position: absolute;
   top: 3vw;
@@ -115,7 +123,8 @@ body {
   text-transform: uppercase;
   letter-spacing: .05em;
   line-height: 1.2em;
-  color: #434343;
+  color: white;
+  z-index: 1;
 }
 
 .project__back-circle {

@@ -121,7 +121,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <Html transform portal={{ current: scrollData.fixed }} position={[0, 2, 22]} rotation={[0, 1.5, 0]}>
+            <Html transform portal={{ current: scrollData.fixed }} position={[2, 2, 21]} rotation={[0, 1.5, 0]}>
                 <div className="content" >
                     Universe
                 </div>
