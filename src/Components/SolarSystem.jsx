@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLoader, useFrame, useThree } from "@react-three/fiber";
 import { MeshDistortMaterial, useTexture, Environment } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
@@ -49,29 +49,38 @@ function SolarSystem({ rotation, scale, clicked, setClicked, setObjPos, setAngle
   const [hovered, hover] = useState(false)
   const { camera } = useThree();
   const [visible, setVisible] = useState(false);
+  const [selected, setSelect] = useState(false)
 
   const texture = useTexture(`/textures/universe1.jpg`)
   const material = new THREE.MeshStandardMaterial({
     map: texture // This applies the texture as the color map
   });
+  useEffect(() => {
+    if (!clicked) {
+      setSelect(false)
+    }
+  }, [clicked])
+
   useFrame((state, delta) => {
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
     setVisible(shouldBeVisible);
 
     // easing.damp(ref.current.material, 'distort', hovered ? 0.5 : 0, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
-    easing.dampE(ref.current.rotation, clicked ? [0, -3.3, 0] : rotation, 0.5, delta)
-    easing.damp3(ref.current.scale, clicked ? [15, 12, 3] : shouldBeVisible ? scale : 0, 0.25, delta)
+    easing.dampE(ref.current.rotation, selected ? [0, -3.3, 0] : rotation, 0.5, delta)
+    easing.damp3(ref.current.scale, selected ? [15, 12, 3] : shouldBeVisible ? scale : 0, 0.25, delta)
 
   })
   return (
     <mesh {...props} ref={ref}
       onPointerOver={(e) => (e.stopPropagation(), hover(true))}
       onPointerOut={(e) => (e.stopPropagation(), hover(false))}
-      onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setObjPos(props.position), setAngle(rotation))}
+      onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setSelect(!selected), setObjPos(props.position), setAngle(rotation))}
     >
       <planeGeometry args={[1, 0.8, 64, 64]} />
-      {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
+      <MeshDistortMaterial map={texture} speed={2} toneMapped={true} />
+
+      {/* {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
         <DissolveMaterial
           baseMaterial={material}
           visible={visible}
@@ -79,7 +88,7 @@ function SolarSystem({ rotation, scale, clicked, setClicked, setObjPos, setAngle
           duration={0.6}
         >
         </DissolveMaterial>
-      }
+      } */}
       <Environment preset="sunset" />
       <EffectComposer>
         <Bloom luminanceThreshold={1} intensity={1.25} mipmapBlur />

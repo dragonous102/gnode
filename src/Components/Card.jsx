@@ -8,6 +8,7 @@ import { Environment } from "@react-three/drei";
 import { DissolveMaterial } from "./DissolveMaterial";
 import * as THREE from "three";
 import { isPointVisible } from "../utils"
+import { useEffect } from "react";
 
 
 function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation, ...props }) {
@@ -18,8 +19,14 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
   const { camera } = useThree();
   const [visible, setVisible] = useState(false);
 
+  useEffect(() => {
+    if (!clicked) {
+      setSelect(false)
+    }
+  }, [clicked])
 
   useFrame((state, delta) => {
+
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
     setVisible(shouldBeVisible);
 
