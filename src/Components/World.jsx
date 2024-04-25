@@ -64,7 +64,7 @@ export default function App({ position }) {
                 <Cube position={[10, 6, -6]} scale={[0.3, Math.random() * 2 + 1, 0.3]}></Cube>
                 <Cube position={[12, 8, -8]} scale={[0.3, Math.random() * 2 + 1, 0.3]}></Cube>
                 <Cube position={[8, 10, -10]} scale={[0.3, Math.random() * 2 + 1, 0.3]}></Cube>
-                <Cube position={[10, 12, -12]} scale={[0.3, Math.random() * 2 + 1, 0.3]}></Cube>
+                <Cube position={[15, 12, -10]} scale={[0.3, Math.random() * 2 + 1, 0.3]}></Cube>
                 <Cube position={[13, 13, -12]} scale={[0.3, Math.random() * 2 + 1, 0.3]}></Cube>
             </Physics>}
         </mesh>
