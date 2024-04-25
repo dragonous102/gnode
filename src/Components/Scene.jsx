@@ -11,6 +11,8 @@ import Torus from "./Torus/Torus";
 import Mount from "./Mount"
 import Arrow from "./Arrow"
 import CardTitle from "./CardTitle";
+import BoxGroup from "./BoxGroup";
+import World from "./World";
 
 function Scene({ children, clicked, setClicked, ...props }) {
     const ref = useRef()
@@ -86,14 +88,18 @@ function Scene({ children, clicked, setClicked, ...props }) {
     })
     return (
         <group ref={ref}>
-
+            <BoxGroup
+                position={[-10, 0, -15]}
+            ></BoxGroup>
             <Road />
             <Torus position={[35, 1, 20]}></Torus>
-            <Mount position={[-30, 1, 12]} scale={0.4} rotation={[0, -2, 0]}></Mount>
+            <Mount position={[-40, 1, 13]} scale={0.4} rotation={[0, -2, 0]}></Mount>
             <Arrow
                 position={[-25, 0.5, -15]}
                 rotation={[-0.6, 0.3, 0]}
             />
+            <World position={[10, 0, -8]}></World>
+
 
             <Card
                 url={`/textures/project4.jpg`}
@@ -104,7 +110,7 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <CardTitle position={[45, 2, -30]} rotation={[0, -1.5, 0]} title={"History of Ancient"}></CardTitle>
+            <CardTitle position={[50, 2, -30]} rotation={[0, -1.5, 0]} title={"History of Ancient"}></CardTitle>
 
             <Card
                 url={`/textures/galaxy1.jpg`}
@@ -143,20 +149,12 @@ function Scene({ children, clicked, setClicked, ...props }) {
                 setObjPos={setObjPos}
                 setAngle={setAngle}
             />
-            <Card
-                url={`/textures/project3.jpg`}
-                position={[-50, 2, 30]}
-                rotation={[0, 3.14, 0]}
-                setClicked={setClicked}
-                clicked={clicked}
-                setObjPos={setObjPos}
-                setAngle={setAngle}
-            />
+
 
             <Card
                 url={`/textures/project3.jpg`}
-                position={[-50, 2, 30]}
-                rotation={[0, 3.14, 0]}
+                position={[-6, 2, 20]}
+                rotation={[0, -1.3, 0]}
                 setClicked={setClicked}
                 clicked={clicked}
                 setObjPos={setObjPos}
@@ -164,8 +162,8 @@ function Scene({ children, clicked, setClicked, ...props }) {
             />
 
             <SolarSystem
-                rotation={[0, Math.PI * 3 / 2, 0]}
-                position={[-15, 2, 20]}
+                position={[-55, 2, 15]}
+                rotation={[0, -3.5, 0]}
                 scale={[6, 5, 2]}
                 setClicked={setClicked}
                 clicked={clicked}

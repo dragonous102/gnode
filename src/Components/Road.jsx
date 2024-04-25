@@ -13,10 +13,10 @@ function Road() {
     let numPoints = 1000; // number of points to calculate
 
     let points = calculateFigureEightPoints(radius, 0, numPoints);
-    let points1 = calculateFigureEightPoints(radius, 3, numPoints);
-    let points2 = calculateFigureEightPoints(radius, -3, numPoints);
-    let points3 = calculateFigureEightPoints(radius, 1.5, numPoints);
-    let points4 = calculateFigureEightPoints(radius, -1.5, numPoints);
+    let points1 = calculateFigureEightPoints(radius, 4, numPoints);
+    let points2 = calculateFigureEightPoints(radius, -4, numPoints);
+    let points3 = calculateFigureEightPoints(radius, 2, numPoints);
+    let points4 = calculateFigureEightPoints(radius, -2, numPoints);
 
     // points.push(points[0]);
     // points1.push(points1[0]);
@@ -94,7 +94,6 @@ function Ecliptic({ points }) {
                 index = index - points.length
             }
             const element = points[index];
-            // console.log(element);
             visibleSegments.push(element)
 
             count++

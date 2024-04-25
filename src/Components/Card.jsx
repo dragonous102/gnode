@@ -13,6 +13,7 @@ import { isPointVisible } from "../utils"
 function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation, ...props }) {
   const ref = useRef()
   const [hovered, hover] = useState(false)
+  const [selected, setSelect] = useState(false)
   const texture = useTexture(url)
   const { camera } = useThree();
   const [visible, setVisible] = useState(false);
@@ -22,11 +23,11 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
     const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
     setVisible(shouldBeVisible);
 
-    easing.damp(ref.current.material, 'distort', hovered ? 0.3 : 0.3, 0.25, delta)
+    easing.damp(ref.current.material, 'distort', hovered ? 0.4 : 0.3, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
     easing.dampE(ref.current.rotation, rotation, 0.5, delta)
-    easing.damp3(ref.current.scale, clicked ? 15 : 8, 0.25, delta)
-    easing.dampC(ref.current.material.color, hovered ? '#fff' : 'white', 0.25, delta)
+    easing.damp3(ref.current.scale, selected ? 15 : (visible ? 8 : 0), 0.25, delta)
+    // easing.dampC(ref.current.material.color, hovered ? '#fff' : 'white', 0.25, delta)
 
   })
   const animProps = useSpring({
@@ -44,12 +45,12 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
         {...animProps}
         onPointerOver={(e) => (e.stopPropagation(), hover(true))}
         onPointerOut={(e) => (e.stopPropagation(), hover(false))}
-        onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setObjPos(props.position), setAngle(rotation))}
+        onClick={(e) => (e.stopPropagation(), setClicked(!clicked), setSelect(!selected), setObjPos(props.position), setAngle(rotation))}
       >
 
         <planeGeometry args={[1, 0.7, 32, 32]} />
-
-        {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
+        <MeshDistortMaterial map={texture} speed={2} toneMapped={true} />
+        {/* {hovered && visible ? <MeshDistortMaterial map={texture} speed={2} toneMapped={true} /> :
           <DissolveMaterial
             baseMaterial={material}
             visible={visible}
@@ -57,7 +58,7 @@ function Card({ url, active, clicked, setClicked, setObjPos, setAngle, rotation,
             duration={0.6}
           >
           </DissolveMaterial>
-        }
+        } */}
 
         <Environment preset="sunset" />
         <EffectComposer>

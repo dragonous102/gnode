@@ -10,7 +10,6 @@ const CardTitle = ({ position, rotation, title }) => {
     const scrollData = useScroll();
 
     useFrame((state, delta) => {
-        console.log(ref.current.position);
 
         const shouldBeVisible = isPointVisible(ref.current.position, camera.position);
         easing.damp3(ref.current.scale, shouldBeVisible ? 1 : 0, 0.25, delta)

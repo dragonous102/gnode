@@ -60,8 +60,8 @@ function SolarSystem({ rotation, scale, clicked, setClicked, setObjPos, setAngle
 
     // easing.damp(ref.current.material, 'distort', hovered ? 0.5 : 0, 0.25, delta)
     easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
-    easing.dampE(ref.current.rotation, clicked ? [0, Math.PI * 3 / 2, 0] : rotation, 0.5, delta)
-    easing.damp3(ref.current.scale, clicked ? [8, 6, 3] : shouldBeVisible ? scale : 0, 0.25, delta)
+    easing.dampE(ref.current.rotation, clicked ? [0, -3.3, 0] : rotation, 0.5, delta)
+    easing.damp3(ref.current.scale, clicked ? [15, 12, 3] : shouldBeVisible ? scale : 0, 0.25, delta)
 
   })
   return (

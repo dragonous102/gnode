@@ -61,7 +61,7 @@ const isPointVisible = (point, cameraPosition) => {
       return true
     }
   }
-  if (idx < closestPoint + SHOW_DISTANCE && idx > closestPoint) {
+  if (idx < closestPoint + SHOW_DISTANCE && idx > closestPoint || idx < closestPoint && idx > closestPoint - SHOW_DISTANCE / 2) {
     return true;
   }
   return false;
